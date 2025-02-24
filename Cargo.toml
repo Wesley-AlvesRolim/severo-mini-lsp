@@ -1,0 +1,11 @@
+[package]
+name = "severo-lsp"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = "1.0.215"
+serde_json = "1.0.133"
+tokio = { version = "1.41.1", features = ["full"] }
+tower-lsp = "0.20.0"
+urlencoding = "2.1.3"

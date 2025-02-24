@@ -1,0 +1,138 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Severo",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#constant"
+		},
+		{
+			"include": "#entity"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#meta"
+		},
+		{
+			"include": "#variable"
+		},
+		{
+			"include": "#storage"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#support"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"name": "punctuation.definition.comment.severo",
+					"begin": "//",
+					"end": "\\n"
+				},
+				{
+					"name": "punctuation.separator.parameter.severo",
+					"match": "/(?<=fun\\s*\\(.*)(,)(?=.*\\s*\\))/g",
+					"flags": ["g"]
+				}
+			]
+		},
+		"constant": {
+			"patterns": [
+				{
+					"name": "constant.numeric.severo",
+					"match": "(?<![[:alpha:]])([0-9.])+(?![[:alpha:]])"
+				},
+				{
+					"name": "constant.language.severo",
+					"match": "\\b(true|false|nil)\\b"
+				}
+			]
+		},
+		"entity": {
+			"patterns": [
+				{
+					"name": "entity.name.function.severo",
+					"match": "(?<=severo\\s+)\\w+(?=\\s*=\\s*fun\\s*\\(.*\\)\\s*{)"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.severo",
+					"match": "\\b(if|elif|else|while|for|in|return|class|this|super)\\b"
+				},
+				{
+					"name": "keyword.operator.severo",
+					"match": "(and|or|\\+|-|\\*|\\/|=|==|!|!=|>|>=|<=|<)"
+				}
+			]
+		},
+		"meta": {
+			"patterns": [
+				{
+					"name": "meta.function.severo",
+					"match": "(?<=severo\\s+)\\w+(?=\\s*=\\s*fun\\s*\\(\\){.*})"
+				},
+				{
+					"name": "meta.function-call.severo",
+					"match": "(?!fun\\b)(?i)\\w+(?=\\((\\w|,|\\s)*\\))"
+				}
+			]
+		},
+		"storage": {
+			"patterns": [
+				{
+					"name": "storage.type.var.severo",
+					"match": "\\b(severo)\\b"
+				},
+				{
+					"name": "storage.type.function.severo",
+					"match": "\\b(fun)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.severo",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.severo",
+					"match": "\\\\."
+				}
+			]
+		},
+		"support": {
+			"patterns": [
+				{
+					"name": "support.function.library.severo",
+					"match": "(?<![^.]\\.|:)\\b((print))\\b(?!\\s*=(?!=))"
+				}
+			]
+		},
+		"variable": {
+			"patterns": [
+				{
+					"name": "variable.parameter.severo",
+					"match": "(?<=fun\\s*\\(.*)(\\w+)+(?:((?:(?=\\s*,\\s*)))*((?:\\w+))*)(?=.*\\s*\\))",
+					"flags": ["g"]
+				},
+				{
+					"name": "variable.other.severo",
+					"match": "\\b(?!severo\\b|fun\\b|if\\b|elif\\b|else\\b|while\\b|for\\b|in\\b|return\\b|class\\b|this\\b|super\\b|print\\b)(\\w+)\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "main.severo"
+}

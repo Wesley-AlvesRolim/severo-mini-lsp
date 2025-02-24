@@ -1,0 +1,60 @@
+{
+	"name": "severo-lang",
+	"displayName": "severo-Lang",
+	"description": "LSP severo lang",
+	"version": "0.0.1",
+	"main": "./dist/extension.cjs",
+	"exports": {
+		"require": {
+			"default": "./dist/extension.cjs"
+		},
+		"import": {
+			"default": "./dist/extension.mjs"
+		}
+	},
+	"type": "module",
+	"scripts": {
+		"build": "pkgroll"
+	},
+	"engines": {
+		"vscode": "^1.95.0"
+	},
+	"categories": ["Programming Languages"],
+	"contributes": {
+		"languages": [
+			{
+				"id": "severo-lang",
+				"aliases": ["Severo lang", "severo-lang"],
+				"extensions": [".severo"],
+				"configuration": "./language-configuration.json",
+				"commands": [
+					{
+						"command": "severo.helloWorld",
+						"title": "Hello World"
+					}
+				]
+			},
+			{
+				"id": "severo",
+				"aliases": ["Severo", "severo"],
+				"extensions": [".severo"],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "severo",
+				"scopeName": "main.severo",
+				"path": "./syntaxes/severo.tmLanguage.json"
+			}
+		]
+	},
+	"dependencies": {
+		"vscode-languageclient": "^9.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "^22.9.0",
+		"@types/vscode": "^1.95.0",
+		"pkgroll": "^2.5.1"
+	}
+}
