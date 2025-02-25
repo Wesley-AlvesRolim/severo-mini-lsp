@@ -69,10 +69,22 @@ pub fn initialize_request(id: i64) -> Request {
 }
 
 pub fn initialized_request(id: i64) -> Request {
-    Request::build("initialized")
+    Request::build("initialized").id(id).finish()
+}
+
+pub fn hover_request(id: i64, file_uri: String, line: usize, character: usize) -> Request {
+    let uri_formatted = format!("file://{}", file_uri);
+    Request::build("textDocument/hover")
         .id(id)
-        .params(json!({}))
+        .params(json!({
+            "textDocument": {"uri": uri_formatted},
+            "position": {"line": line, "character": character}
+        }))
         .finish()
+}
+
+pub fn shutdown_request(id: i64) -> Request {
+    Request::build("shutdown").id(id).finish()
 }
 
 pub fn format_response(response: Value) -> String {
