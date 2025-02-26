@@ -83,6 +83,17 @@ pub fn hover_request(id: i64, file_uri: String, line: usize, character: usize) -
         .finish()
 }
 
+pub fn completion_request(id: i64, file_uri: String, line: usize, character: usize) -> Request {
+    let uri_formatted = format!("file://{}", file_uri);
+    Request::build("textDocument/completion")
+        .id(id)
+        .params(json!({
+            "textDocument": {"uri": uri_formatted},
+            "position": {"line": line, "character": character}
+        }))
+        .finish()
+}
+
 pub fn shutdown_request(id: i64) -> Request {
     Request::build("shutdown").id(id).finish()
 }

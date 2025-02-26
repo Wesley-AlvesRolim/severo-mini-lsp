@@ -3,7 +3,9 @@ use tower_lsp::{LspService, Server};
 
 pub mod backend;
 pub mod consts;
+pub mod helpers;
 pub mod methods;
+pub mod spec;
 pub mod tests;
 
 #[tokio::main]
