@@ -26,4 +26,4 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: interpreter/rust-version/target/x86_64-pc-windows-gnu/release/severo-lang-windows.exe
+          files: target/x86_64-pc-windows-gnu/release/severo-lang-windows.exe
