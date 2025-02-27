@@ -42,6 +42,17 @@ cargo test
 cargo llvm-cov --ignore-filename-regex=main.rs --html
 ```
 
+## 🖥️ Run VS Code Extension
+
+1. Open a terminal on the root project
+2. Build the code
+```sh
+cargo build --release
+```
+3. Open the folder 'vscode-extension' with VS Code
+4. Open the 'Run and Debug' tab or use CTRL + SHIFT + d
+5. And run the extension with play button
+
 ---
 
 Made with ❤️ by Wesley Alves Rolim 👋 [Get in touch](https://www.linkedin.com/in/wesley-alves-rolim/)
