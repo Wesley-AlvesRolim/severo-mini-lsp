@@ -206,6 +206,30 @@ mod tests {
     }
 
     #[tokio::test(flavor = "current_thread")]
+    async fn completion_for_var() {
+        let (mut req_client, resp_client) = init_lsp().await;
+        let request_id = 3;
+        let expected_response = format_response(build_response(
+            request_id,
+            Ok(json!([{"label":"variableName", "kind":6}])),
+        ));
+
+        let current_dir = env::current_dir().expect("Failed to get current directory");
+        let completion_mock = current_dir
+            .join("src/tests/mocks/completion.severo")
+            .to_string_lossy()
+            .to_string();
+        let completion_request = completion_request(request_id, completion_mock, 4, 9);
+        req_client
+            .write_all(format_request(completion_request).as_bytes())
+            .await
+            .unwrap();
+
+        let response = get_response_string(resp_client).await;
+        assert_outputs(expected_response, response)
+    }
+
+    #[tokio::test(flavor = "current_thread")]
     async fn completion_empty() {
         let (mut req_client, resp_client) = init_lsp().await;
         let request_id = 3;

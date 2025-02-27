@@ -13,7 +13,7 @@ pub fn get_word_in_line_col_position(
 
     for col_index in (0..cursor_column_position).rev() {
         let current_char = line.chars().nth(col_index).unwrap();
-        if current_char.is_whitespace() {
+        if current_char.is_whitespace() || current_char == '(' {
             start_word = col_index + 1;
             break;
         } else {
@@ -23,11 +23,7 @@ pub fn get_word_in_line_col_position(
 
     for col_index in cursor_column_position..line_len {
         let current_char = line.chars().nth(col_index).unwrap();
-        if current_char.is_whitespace() {
-            end_word = col_index;
-            break;
-        }
-        if current_char == '(' {
+        if current_char.is_whitespace() || current_char == '(' || current_char == ')' {
             end_word = col_index;
             break;
         }
@@ -100,6 +96,14 @@ mod tests {
         let line = "print(\"Hello World\")".to_string();
         let (found_word, _, _) = get_word_in_line_col_position(line, 3);
         let expected_word = "print".to_string();
+        assert_eq!(expected_word, found_word);
+    }
+
+    #[test]
+    fn should_found_word_when_is_inside_call_of_function() {
+        let line = "print(var)".to_string();
+        let (found_word, _, _) = get_word_in_line_col_position(line, 7);
+        let expected_word = "var".to_string();
         assert_eq!(expected_word, found_word);
     }
 
